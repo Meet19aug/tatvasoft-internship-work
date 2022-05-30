@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\meetp\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\meetp\\.nuget\\packages"
+    ]
+  }
+}

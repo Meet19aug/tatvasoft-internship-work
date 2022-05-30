@@ -1,0 +1,6 @@
+Command to connect to database Local postgres <PgAdmin>
+
+dotnet ef dbcontext scaffold "Server=localhost;Port=5432;Database=BookStore;User Id=postgres;Password=password" Npgsql.EntityFrameworkCore.PostgreSQL -o ViewModels
+
+Error: Dotnet -ef does not exists.
+Solution: dotnet tool install --global dotnet-ef 

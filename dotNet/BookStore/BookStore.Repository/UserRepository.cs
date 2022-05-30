@@ -12,9 +12,20 @@ namespace BookStore.Repository
     {
         BookStoreContext _context = new BookStoreContext();
 
-        public List<User> GetUsers()
+        public List<User> GetUsers(int pageIndex, int pageSize , string keyword )
         {
-            return _context.Users.ToList();
+            var users = _context.Users.AsQueryable();
+            if(pageIndex >0)
+            {
+                if(string.IsNullOrEmpty(keyword) == false)
+                {
+                    users = users.Where(x => x.Firstname.ToLower().Contains(keyword) || x.Lastname.ToLower().Contains(keyword));
+                }
+                var userList = users.Skip((pageIndex-1)* pageSize).Take(pageSize).ToList();
+
+                return userList;
+            }
+            return null;
         }
 
         public User Login(LoginModel model)

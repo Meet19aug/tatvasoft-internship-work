@@ -1,47 +1,37 @@
 ﻿using BookStore.Models.Models;
 using BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
 
 namespace BookStore.Api.Controllers
 {
+    [Route("api/user")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         UserRepository _repository = new UserRepository();
         [HttpGet]
-        [Route("GetUsers")]
-        public IActionResult GetUsers()
+        [Route("list")]
+        public IActionResult GetUsers(int pageIndex = 1, int pageSize = 10, string keyword = "")
         {
-
-            return Ok(_repository.GetUsers());
-        }
-
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login(LoginModel model)
-        {
-
-            var user = _repository.Login(model);
-            if(user == null)
+            
+            try
             {
-                return NotFound();
+                var users = _repository.GetUsers(pageIndex,pageSize,keyword);
+                if (users == null)
+                    return StatusCode(HttpStatusCode.NotFound.GetHashCode(), "Please Provide Correct Information." );
+
+                return StatusCode(HttpStatusCode.OK.GetHashCode(), users);
             }
-            return Ok(user);
-
-        }
-
-        [HttpPost]
-        [Route("register")]
-        public IActionResult Register(RegisterModel model)
-        {
-            var user = _repository.Register(model);
-            if (user == null)
+            catch (Exception ex)
             {
-                return BadRequest();
-            }
-            return Ok(user);
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
 
+            }
         }
+
+        
 
 
     }

@@ -48,6 +48,37 @@ namespace BookStore.Repository
             return entry.Entity;
         }
 
+        public User GetUser(int id)
+        {
+            
+            if (id > 0)
+            {
+                return _context.Users.Where(c => c.Id == id).FirstOrDefault();
+
+            }
+            return null;
+        }
+
+        public bool UpdateUser(User model)
+        {
+            if(model.Id > 0)
+            {
+                _context.Update(model);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool DeleteUser(User model)
+        {
+            if (model.Id > 0)
+            {
+                _context.Remove(model);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
 
     }
 }

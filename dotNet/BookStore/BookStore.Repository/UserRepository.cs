@@ -8,9 +8,9 @@ using BookStore.Models.Models;
 
 namespace BookStore.Repository
 {
-    public class UserRepository
+    public class UserRepository : BaseRepository
     {
-        BookStoreContext _context = new BookStoreContext();
+
 
         public List<User> GetUsers(int pageIndex, int pageSize , string keyword )
         {

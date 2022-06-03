@@ -4,7 +4,11 @@ import { ClassBasedCounter } from './Components/ClassBasedCounter';
 import Counter from './Components/Counter';
 import CustomButton from "./Components/CustomButton";
 import CustomInput from './Components/CustomInput';
+import { NewComponent } from './Components/NewComponent';
+import { Person } from './Components/Person';
+import UseMemoComponents from './Components/UseMemoComponents';
 import User from './Components/User';
+import { UserWrapper } from './Context/User';
 
 function App() {
   const handleButtonCLick = (label:String)=>{
@@ -15,12 +19,17 @@ function App() {
   }
   return (
     <Fragment>
+      <UserWrapper>
       {/* <CustomButton label="Click Here" handleClickEvent={handleButtonCLick} style={{background: "blue", color: "red", marginRight: "50px"}}/>
       <CustomButton label="Click Here Again" handleClickEvent={handleButtonCLick} style={{background: "red", color: "blue"}}/>
       <CustomInput value="PreDefined String" handleChange={handleChangeEvent}/> */}
-      <Counter/>
+      {/* <Counter/> */}
       {/* <ClassBasedCounter/> */}
-      <User/>
+      {/* <User/> */}
+      <Person firstName='Meet' lastName='Patel'/>
+      <NewComponent/>
+      <UseMemoComponents/>
+      </UserWrapper>
     </Fragment>
   );
 }
